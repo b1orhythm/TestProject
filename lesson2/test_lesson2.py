@@ -3,7 +3,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import random
 
-# Config
+# CFG
 host = 'http://127.0.0.1:7000'
 user = 'test_user'
 password = 'test_password'
