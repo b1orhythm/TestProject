@@ -55,7 +55,7 @@ def test_check_list_books(sort, limit):
         assert 'author' in book
         assert 'id' in book
 
-    if (limit != -1 and limit !=0):
+    if (limit > 0):
         assert len(data) <= limit
     else:
         assert len(data) >= 4
