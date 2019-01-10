@@ -48,8 +48,6 @@ def test_check_list_books(sort, limit):
 
     data = get_list_books(params)
 
-    print(data)
-
     for book in data:
         assert 'title' in book
         assert 'author' in book
@@ -64,8 +62,8 @@ def test_check_list_books(sort, limit):
         assert data[0]['title'] == ''
 
 
-@pytest.mark.parametrize('title', ['', 'Book with title', u'Книга с интересным названием', '$^&%@&(*!_+=', '*(&ADIG!7213'*100])
-@pytest.mark.parametrize('author', ['', 'book Author', u'Автор книги', '$^&%@&(*!_+=', '*(&ADIG!7213'*100])
+@pytest.mark.parametrize('title', ['', "'", 'Book with title', u'Книга с интересным названием', '$^&%@&(*!_+=', '*(&ADIG!7213'*100])
+@pytest.mark.parametrize('author', ['', "'", 'book Author', u'Автор книги', '$^&%@&(*!_+=', '*(&ADIG!7213'*100])
 def test_add_book(title, author):
     # Запрашиваем текущее кол-во книг
     amount = len(get_list_books())
