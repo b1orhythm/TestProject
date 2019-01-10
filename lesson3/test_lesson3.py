@@ -44,7 +44,7 @@ def test_check_list_books(sort, limit):
     add_book({'author': 'D-author', 'title': 'M'})
     add_book({'author': 'L-author', 'title': 'B'})
 
-    params = {'sort': sort, 'limit': limit}
+    params = {'sort': sort, 'limit': int(limit)}
 
     data = get_list_books(params)
 
