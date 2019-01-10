@@ -35,19 +35,33 @@ def test_check_login():
 
 """
 
-def test_check_list_books():
+@pytest.mark.parametrize('sort', ['', 'by_title'])
+@pytest.mark.parametrize('limit', [-1, 0, 2, 5, 10, 50, 100])
+def test_check_list_books(sort, limit):
 
     add_book({'author': '', 'title': ''})
-    add_book({'author': 'unknown', 'title': 'Second Book'})
+    add_book({'author': 'Author', 'title': 'Z'})
+    add_book({'author': 'D-author', 'title': 'M'})
+    add_book({'author': 'L-author', 'title': 'B'})
 
-    data = get_list_books()
+    params = {'sort': sort, 'limit': limit}
+
+    data = get_list_books(params)
+
+    print(data)
 
     for book in data:
         assert 'title' in book
         assert 'author' in book
         assert 'id' in book
 
-    assert len(data) >= 2
+    if (limit != -1 and limit !=0):
+        assert len(data) <= limit
+    else:
+        assert len(data) >= 4
+
+    if sort == 'by_title':
+        assert data[0]['title'] == ''
 
 
 @pytest.mark.parametrize('title', ['', 'Book with title', u'Книга с интересным названием', '$^&%@&(*!_+=', '*(&ADIG!7213'*100])
@@ -132,4 +146,3 @@ def test_update_book(title, author):
 
     assert data['title'] == title, "ERROR: Book title not updated!"
     assert data['author'] == author, "ERROR: Book author not updated!"
-

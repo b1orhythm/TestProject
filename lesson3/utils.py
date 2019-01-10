@@ -17,8 +17,8 @@ password = get_conf_param('DEFAULT', 'password', '')
 host = get_conf_param('DEFAULT', 'host', 'http://127.0.0.1:7000')
 
 
-def get(url, cookies=None, auth_data=None):
-    result = requests.get(url, cookies=cookies, auth=auth_data)
+def get(url, cookies=None, auth_data=None, params=None):
+    result = requests.get(url, cookies=cookies, auth=auth_data, params=params)
 
     print('GET request to {0}'.format(url))
     print('Status code: {0}'.format(result.status_code))
@@ -68,10 +68,10 @@ def auth():
     return {'my_cookie': data['auth_cookie']}
 
 
-def get_list_books():
+def get_list_books(params=None):
     """ Получаем и возвращаем список книг"""
 
-    result = get('{0}/books'.format(host), cookies=auth())
+    result = get('{0}/books'.format(host), cookies=auth(), params=params)
 
     return result.json()
 

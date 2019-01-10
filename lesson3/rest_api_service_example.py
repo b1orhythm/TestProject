@@ -58,7 +58,7 @@ def get_list_of_books():
         if list_limit > 0:
             result = result[:list_limit]
 
-        return flask.jsonify(BOOKS)
+        return flask.jsonify(result)
 
     raise InvalidUsage('No valid auth cookie provided!')
 
